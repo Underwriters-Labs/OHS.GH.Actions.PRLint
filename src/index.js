@@ -7,7 +7,7 @@ import { config } from "./config";
 
 const context = github.context;
 
-async function run() {
+const run = async () => {
   const title = context.payload.pull_request.title;
   const body = context.payload.pull_request.body;
   const commitlint_input = title + "\n\n" + body;
