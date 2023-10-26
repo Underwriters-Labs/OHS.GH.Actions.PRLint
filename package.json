@@ -1,0 +1,34 @@
+{
+  "name": "@underwriter-labs/ohs-pr-commitlint",
+  "version": "0.0.1",
+  "description": "A reusable GitHub Action for running CommitLint against PR title and message",
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "CommitLint"
+  ],
+  "engines": {
+    "node": "^16",
+    "npm": "^8"
+  },
+  "scripts": {
+    "prepare": "ncc build src/index.js -o dist && cat src/patch.js dist/index.js > dist/temp.js && mv dist/temp.js dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Underwriters-Labs/OHS.GH.Actions.PRLint.git"
+  },
+  "homepage": "https://github.com/Underwriters-Labs/OHS.GH.Actions.PRLint#readme",
+  "author": "UL Solutions - PureOHS",
+  "license": "LicenseRef-LICENSE",
+  "dependencies": {
+    "@actions/core": "1.10.1",
+    "@actions/github": "6.0.0",
+    "@commitlint/lint": "18.1.0",
+    "@commitlint/load": "18.2.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "0.38.1",
+    "prettier": "3.0.3"
+  }
+}
