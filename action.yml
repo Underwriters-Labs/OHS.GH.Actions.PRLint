@@ -1,0 +1,5 @@
+name: PR Merge Commitlint
+description: Checks if the PR title and description follows commitlint header and body/footer respectively.
+runs:
+  using: node16
+  main: dist/index.js

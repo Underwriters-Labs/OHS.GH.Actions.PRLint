@@ -23,11 +23,22 @@ async function run() {
       core.info("All OK");
     } else {
       core.info(stringify(report));
+      core.setFailed(`Action failed: Improper title/description format.`)
     }
-    console.log(report);
+    return report;
   } catch (error) {
-    core.info(error);
+    //core.info(error);
+    throw new Error('An error occurred when running CommitLint', {cause: error})
   }
 }
 
-run();
+(async () => {
+  try {
+    const result = await run();
+    console.log(result);
+  } catch (err) {
+    core.info(err);
+    core.setFailed(`Action failed with error ${err}`)
+  }
+})();
+
