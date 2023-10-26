@@ -1,6 +1,6 @@
 {
   "name": "@underwriter-labs/ohs-pr-commitlint",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A reusable GitHub Action for running CommitLint against PR title and message",
   "keywords": [
     "GitHub",
