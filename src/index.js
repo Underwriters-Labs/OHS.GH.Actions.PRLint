@@ -13,8 +13,8 @@ const run = async () => {
   const commitlint_input = title + "\n\n" + body;
 
   try {
-    const opts = load(config);
-    const report = lint(
+    const opts = await load(config);
+    const report = await lint(
       commitlint_input,
       opts.rules,
       opts.parserPreset ? { parserOpts: opts.parserPreset.parserOpts } : {}
@@ -23,14 +23,16 @@ const run = async () => {
       core.info("All OK");
     } else {
       core.info(stringify(report));
-      core.setFailed(`Action failed: Improper title/description format.`)
+      core.setFailed(`Action failed: Improper title/description format.`);
     }
     return report;
   } catch (error) {
     //core.info(error);
-    throw new Error('An error occurred when running CommitLint', {cause: error})
+    throw new Error("An error occurred when running CommitLint", {
+      cause: error,
+    });
   }
-}
+};
 
 (async () => {
   try {
@@ -38,7 +40,6 @@ const run = async () => {
     console.log(result);
   } catch (err) {
     core.info(err);
-    core.setFailed(`Action failed with error ${err}`)
+    core.setFailed(`Action failed with error ${err}`);
   }
 })();
-
