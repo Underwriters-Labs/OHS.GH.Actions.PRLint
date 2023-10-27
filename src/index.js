@@ -23,7 +23,6 @@ const run = async () => {
       core.info("All OK");
     } else {
       core.info(stringify(report));
-      console.log(report.errors.map(({ message }) => message));
       core.setFailed(`Action failed: Improper title/description format.`);
     }
     return report;
@@ -37,6 +36,9 @@ const run = async () => {
 (async () => {
   try {
     const result = await run();
+    if (!result.valid) {
+      console.log(result.errors.map(({ message }) => message));
+    }
   } catch (err) {
     core.info(err);
     core.setFailed(`Action failed with error ${err}`);
