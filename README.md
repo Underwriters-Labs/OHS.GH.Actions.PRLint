@@ -2,6 +2,8 @@
 
 This package contains a reusable GitHub Action for running [CommitLint](https://github.com/conventional-changelog/commitlint) against a pull request title & message.
 
+The check will also validate that, if the pull request is a `fix` or `feat` type, that the story or defect identifier is included in the description.
+
 ## Uses A Custom Configuration
 
 The configuration for this action is a slight adjustment over the [default](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional) (see above link for that configuration), with the following modifications:
