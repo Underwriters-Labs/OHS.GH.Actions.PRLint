@@ -7,6 +7,22 @@ import { config } from "./config";
 
 const context = github.context;
 
+const checkedTypes = ["fix", "feat"];
+
+function testForStoryOrDefect(msg) {
+  const msgParts = msg.split("\n");
+  const [title] = msgParts;
+  const [type] = title.split(":");
+  const [ident] = msgParts.slice(-1);
+  if (
+    checkedTypes.includes(type) &&
+    (msgParts.length === 1 || !/^#\d+/.test(ident))
+  ) {
+    return false;
+  }
+  return true;
+}
+
 const run = async () => {
   const title = context.payload.pull_request.title;
   const body = context.payload.pull_request.body;
@@ -20,7 +36,13 @@ const run = async () => {
       opts.parserPreset ? { parserOpts: opts.parserPreset.parserOpts } : {}
     );
     if (report.valid) {
-      core.info("All OK");
+      if (testForStoryOrDefect(commitlint_input)) {
+        core.info("All OK");
+      } else {
+        core.setFailed(
+          `Action failed: You forgot the story/defect identifier ('#[identifier]').`
+        );
+      }
     } else {
       core.info(stringify(report));
       core.setFailed(`Action failed: Improper title/description format.`);
