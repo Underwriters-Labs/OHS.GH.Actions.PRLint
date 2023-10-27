@@ -19,15 +19,14 @@ const run = async () => {
       opts.rules,
       opts.parserPreset ? { parserOpts: opts.parserPreset.parserOpts } : {}
     );
-    if (report.value) {
+    if (report.valid) {
       core.info("All OK");
     } else {
-      core.info(stringify(report));
+      core.info(stringify(report.errors.map(({ message }) => message)));
       core.setFailed(`Action failed: Improper title/description format.`);
     }
     return report;
   } catch (error) {
-    //core.info(error);
     throw new Error("An error occurred when running CommitLint", {
       cause: error,
     });
