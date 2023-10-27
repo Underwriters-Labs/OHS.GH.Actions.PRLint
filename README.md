@@ -9,6 +9,8 @@ The configuration for this action is a slight adjustment over the [default](http
 1. Subject case is set to `sentence-case` instead of `lower-case`
 2. Scope case (`scope-case`) is not enforced
 
+## Usage
+
 To implement this action in your repository, create a new workflow file in the `.github/workflows` directory. The following is an example of a workflow file that uses this action:
 
 ```yaml
@@ -34,3 +36,11 @@ jobs:
         if: steps.lint.outcome != 'success'
         run: echo "${{ steps.lint.outputs.message }}" >> $GITHUB_STEP_SUMMARY
 ```
+
+## For Best Results
+
+There are a few things you can do to get the most out of this action:
+
+1. In a repo's general `Settings`, in the `Pull Request` area, only `Allow squash merging`, and select `Default to pull request title and description` in the dropdown. This will ensure that the commit message is the same as the pull request title and message.
+2. After putting this action in place, in the repo's `Settings` under the `Branches` sub nav menu, update the `Branch protection rules` for the `master` branch to `Require status checks to pass before merging`, and it's sub option `Require branches to be up to date before merging`. This will ensure that the action runs before a pull request can be merged.
+3. In the `Status checks that are required` section, select the `CommitLint` check. This will ensure that the action runs before a pull request can be merged.
