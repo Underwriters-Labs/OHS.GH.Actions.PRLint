@@ -40,7 +40,7 @@ const run = async () => {
         core.info("All OK");
       } else {
         core.setFailed(
-          `Action failed: You forgot the story/defect identifier ('#[identifier]').`
+          `Action failed: You forgot the story/defect identifier in your description ('#[identifier]').`
         );
       }
     } else {
