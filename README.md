@@ -32,7 +32,7 @@ jobs:
         run: npm ci
       - name: Lint
         id: lint
-        uses: Underwriters-Labs/OHS.GH.Actions.PRLint@v0.0.10
+        uses: Underwriters-Labs/OHS.GH.Actions.PRLint@v0.0.12
       # Post some output on failure
       - name: Output Results
         if: steps.lint.outcome != 'success'
